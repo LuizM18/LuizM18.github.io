@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carta de Apresentação - O Programador Destemido</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Bootstrap Icons CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Google Fonts: Inter para corpo, e Playfair Display para títulos -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="/assets/images/logo.png">
+    <style>
+        :root {
+            --dark-blue: #0A192F;
+            --rich-black: #1A1A1D;
+            --gold-accent: #FFD700;
+            --silver-light: #C0C0C0;
+            --blood-red: #8B0000;
+            --text-color: #E0E0E0;
+            --secondary-text: #A0A0A0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--rich-black);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            color: var(--gold-accent);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Navbar customizada */
+        .navbar-custom {
+            background-color: var(--dark-blue);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+            padding: 1rem 0;
+            z-index: 1030;
+            position: sticky;
+            top: 0;
+        }
+        .navbar-brand-custom {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--gold-accent) !important;
+            transition: color 0.3s ease;
+            display: flex; /* Para alinhar o ícone/imagem com o texto */
+            align-items: center;
+        }
+        .navbar-brand-custom img {
+            height: 30px; /* Tamanho da logo */
+            width: auto;
+            border-radius: 0%; /* Sem borda circular para essa logo */
+            margin-right: 10px;
+        }
+        .navbar-brand-custom:hover {
+            color: var(--silver-light) !important;
+        }
+        .nav-link-custom {
+            color: var(--silver-light) !important;
+            font-weight: 600;
+            margin: 0 10px;
+            transition: color 0.3s ease, transform 0.2s ease;
+        }
+        .nav-link-custom:hover {
+            color: var(--gold-accent) !important;
+            transform: translateY(-2px);
+        }
+        .btn-outline-gold {
+            color: var(--gold-accent);
+            border-color: var(--gold-accent);
+            transition: all 0.3s ease;
+        }
+        .btn-outline-gold:hover {
+            background-color: var(--gold-accent);
+            color: var(--dark-blue);
+            transform: scale(1.05);
+        }
+
+        /* Hero Section (reaproveitada como banner para a carta) */
+        .page-banner {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('assets/images/bg-hero.jpeg') center center / cover no-repeat;
+            min-height: 30vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            padding: 2rem;
+        }
+        .page-banner h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--gold-accent);
+            animation: fadeIn 1.5s ease-out;
+        }
+        @media (max-width: 768px) {
+            .page-banner h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Carta de Apresentação Section */
+        #cover-letter-content {
+            background-color: var(--dark-blue);
+            padding: 60px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            margin-top: -80px; /* Sobrepõe um pouco o banner */
+            position: relative;
+            z-index: 1;
+            border: 1px solid var(--gold-accent);
+        }
+        #cover-letter-content p {
+            font-size: 1.15rem;
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+        }
+        #cover-letter-content strong {
+            color: var(--gold-accent);
+        }
+        #cover-letter-content .signature {
+            margin-top: 3rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--silver-light);
+        }
+        #cover-letter-content .contact-info a {
+            color: var(--gold-accent);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        #cover-letter-content .contact-info a:hover {
+            color: var(--silver-light);
+        }
+
+        /* Footer */
+        .footer-custom {
+            background-color: var(--dark-blue);
+            padding: 30px 0;
+            text-align: center;
+            color: var(--secondary-text);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 50px;
+        }
+        .footer-custom a {
+            color: var(--gold-accent);
+            text-decoration: none;
+        }
+        .footer-custom a:hover {
+            color: var(--silver-light);
+        }
+
+        /* Animações (para a carta) */
+        .animate__fadeInUp {
+            animation-name: fadeInUp;
+            animation-duration: 1.5s;
+            animation-fill-mode: both;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translate3d(0, 40px, 0);
+            }
+            to {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+        <div class="container">
+            <a class="navbar-brand-custom" href="index.html">
+                <img src="assets/images/logo.png" alt="Logo O Desbravador" class="me-2" style="height: 60px; width: auto; border-radius: 0%;">
+                &lt;/&gt; O Desbravador
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link-custom" href="index.html#hero">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link-custom" href="index.html#vision">Visão</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link-custom" href="index.html#expertise">Expertise</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link-custom" href="index.html#projects">Projetos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link-custom" href="index.html#journey">Jornada</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link-custom active" aria-current="page" href="cover-letter.html">Carta de Apresentação</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link-custom" href="index.html#contact">Contato</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-banner">
+        <h1 class="display-3">O Futuro do Código: Uma Declaração de Potencial Incontestável</h1>
+    </div>
+
+    <section class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div id="cover-letter-content" class="animate__animated animate__fadeInUp">
+                    <p>Prezado(a),</p>
+
+                    <p>Ao adentrar o universo da programação, eu não vejo apenas linhas de código, mas sim o campo de batalha onde <strong>soluções inovadoras são forjadas e o futuro digital é esculpido</strong>. Embora meus passos iniciais sejam recentes, minha trajetória é marcada por uma <strong>capacidade de absorção e aplicação do conhecimento que transcende a experiência linear</strong>.</p>
+
+                    <p>Minha paixão por desvendar complexidades e construir o que antes era apenas conceitual me impulsiona a dominar cada ferramenta, cada framework e cada paradigma. Meus projetos, embora demonstrativos de um ponto de partida, são o testemunho de um <strong>rigor lógico impecável e de uma dedicação que não conhece limites</strong>. Eles representam a materialização de um aprendizado acelerado e a prova de que, onde há um desafio, há uma <strong>oportunidade para minha ascensão e para o meu impacto</strong>.</p>
+
+                    <p>Não busco apenas um espaço; busco uma arena onde meu potencial possa ser liberado e multiplicado. Minha sede por conhecimento é insaciável, e a cada nova tecnologia, vejo uma nova fronteira a ser conquistada. Sou um <b>resolvedor nato de problemas, um entusiasta da otimização e um defensor da escrita de código limpo e eficiente</b>.</p>
+
+                    <p>Estou pronto para ir além do esperado, para mergulhar em projetos que exigem não só habilidade, mas também <b>visão estratégica e determinação ferrenha</b>. Convido-o(a) a ver além do currículo convencional e a reconhecer em mim o <strong>arquiteto de soluções que está apenas começando a demonstrar sua verdadeira magnitude</strong>.</p>
+
+                    <p>Agradeço a sua atenção e coloco-me à disposição para uma conversa que, estou certo, revelará a sinergia entre meus objetivos e as suas necessidades.</p>
+
+                    <p class="signature">Atenciosamente,</p>
+                    <p class="signature"><strong>Luiz Mario A.</strong></p>
+                    <p class="contact-info">
+                        <a href="mailto:luizmario2007deus@gmail.com"><i class="bi bi-envelope-fill me-2"></i>luizmario2007deus@gmail.com</a> <br>
+                        <a href="https://linkedin.com/in/luizm18" target="_blank" rel="noopener noreferrer"><i class="bi bi-linkedin me-2"></i>linkedin.com/in/luizm18</a> <br>
+                        <a href="https://github.com/LuizM18" target="_blank" rel="noopener noreferrer"><i class="bi bi-github me-2"></i>github.com/LuizM18</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-custom">
+        <div class="container">
+            <p>Construindo Legados Digitais. &copy; 2025. Todos os Direitos Reservados.</p>
+            <p>
+                <a href="#"><i class="bi bi-linkedin me-2"></i></a>
+                <a href="https://github.com/LuizM18"><i class="bi bi-github me-2"></i></a>
+                <a href="#"><i class="bi bi-twitter me-2"></i></a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

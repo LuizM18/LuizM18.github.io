@@ -1,0 +1,25 @@
+# Arquivos e pastas do Node.js
+node_modules/
+.env
+
+# Arquivos de log
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDEs
+.vscode/ # Ignora configurações locais do VS Code
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# Arquivos de build (se você tivesse um processo de build com Vite/Webpack, etc.)
+dist/
+build/
+
+# Outros arquivos temporários
+*.tmp
+*.bak
+*~
