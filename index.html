@@ -410,6 +410,77 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+
+        /* Container que segura o boneco no canto do footer */
+        .character-area {
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 250px; /* tamanho da imagem */
+            height: 200px;
+            pointer-events: none; /* Não atrapalha cliques no footer */
+            display: flex;
+            align-items: flex-end;
+        }
+
+        .character-sprite {
+            height: 150px; /* Tamanho do boneco */
+            width: auto;
+            z-index: 3;
+            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
+        }
+
+        /* A Imagem do Kamehameha */
+        .energy-blast-img {
+            position: absolute;
+            bottom: 10px;
+            left: 80px; 
+            height: 100px; /* Altura do feixe de energia */
+            width: 0;     /* Começa invisível */
+            object-fit: fill;
+            z-index: 2;
+            opacity: 0;
+            filter: drop-shadow(0 0 15px #00d4ff);
+    
+        /* ANIMAÇÃO */
+            animation: fireKamehameha 6s infinite ease-in;
+        }
+
+        /* Timeline da animação */
+        @keyframes fireKamehameha {
+            0%, 65% { 
+                width: 0; 
+                opacity: 0; 
+            }
+            70% { 
+                width: 100px; 
+                opacity: 1; 
+            }
+            85% { 
+                width: 1200px; /* Estica o poder para fora da tela */
+                opacity: 1; 
+            }
+            95% { 
+                width: 1500px; 
+                opacity: 0; 
+            }
+            100% { 
+                width: 0; 
+                opacity: 0; 
+            }
+        }
+
+        /* Pequeno tremor no boneco na hora do disparo */
+        .character-sprite {
+            animation: characterShake 6s infinite;
+        }
+
+        @keyframes characterShake {
+            0%, 68% { transform: translate(0, 0); }
+            70%, 85% { transform: translate(-2px, 1px); }
+            90% { transform: translate(0, 0); }
+        }
     </style>
 </head>
 <body data-bs-spy="scroll" data-bs-target="#navbarNav" data-bs-offset="56">
@@ -663,15 +734,19 @@
     
 
     <!-- Footer -->
-    <footer class="footer-custom">
+    <footer class="footer-custom" style="position: relative; overflow: hidden;">
         <div class="container">
-            <p>LuizM18. &copy; 2025. Todos os Direitos Reservados.</p>
+            <p>Construindo Legados Digitais. &copy; 2025. Todos os Direitos Reservados.</p>
             <p>
                 <a href="https://www.linkedin.com/in/luizm18"><i class="bi bi-linkedin me-2"></i></a>
                 <a href="https://github.com/LuizM18"><i class="bi bi-github me-2"></i></a>
                 <a href="#"><i class="bi bi-twitter me-2"></i></a>
             </p>
+        <div class="character-area">
+            <img src="assets/images/LuizIA.png" class="character-sprite" alt="Luiz IA">
+            <img src="assets/images/kamehameha.png" class="energy-blast-img" alt="Poder">
         </div>
+    </div>
     </footer>
 
     <!-- Gsap -->
