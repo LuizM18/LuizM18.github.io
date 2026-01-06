@@ -98,6 +98,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     window.addEventListener('scroll', handleScrollTimeline);
     handleScrollTimeline();
+
+
+    // --- 4. LÓGICA DO LER MAIS ---
+    const projectTexts = document.querySelectorAll('.project-card .card-text');
+
+    projectTexts.forEach(text => {
+        text.addEventListener('click', () => {
+            text.classList.toggle('expanded');
+        
+            // Opcional: Rolar suavemente para o card se a descrição for muito longa
+            if (text.classList.contains('expanded')) {
+                text.style.cursor = 'zoom-out';
+            } else {
+                text.style.cursor = 'zoom-in';
+        }
+    });
+});
 });
 
 // Animação GSAP
