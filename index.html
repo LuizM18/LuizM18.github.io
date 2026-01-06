@@ -512,7 +512,7 @@
             </div>
             <div class="col-md-6 col-lg-4">
                 <div class="card h-100 project-card">
-                    <img src="assets/images/project-2.jpg" class="card-img-top" alt="Website Responsivo para E-commerce" onerror="this.onerror=null;this.src='https://placehold.co/600x400/0A192F/C0C0C0?text=E-commerce+Responsivo';">
+                    <img src="assets/images/E-commerce.jpeg" class="card-img-top" alt="Website Responsivo para E-commerce" onerror="this.onerror=null;this.src='https://placehold.co/600x400/0A192F/C0C0C0?text=E-commerce+Responsivo';">
                     <div class="card-body">
                         <h5 class="card-title">Website Responsivo para E-commerce</h5>
                         <p class="card-text">
@@ -549,7 +549,7 @@
         <div class="timeline">
             <div class="timeline-container left">
                 <div class="timeline-content">
-                    <h3>2024 - Presente</h3>
+                    <h3>2024 - 2025</h3>
                     <h4>Desenvolvedor Fullstack | Eudoro Villela</h4>
                     <p>Imersão intensiva em desenvolvimento web, cobrindo front-end (React), back-end (Node.js) e banco de dados (MySQL), com foco em projetos práticos e metodologias ágeis, além de abranger as mais importantes áreas da programação e gestão de projetos.</p>
                 </div>
@@ -580,39 +580,49 @@
 
     <!-- Contact Section -->
     <section id="contact" class="container fade-in-up-on-scroll">
-        <h2 class="text-center mb-5">Conecte-se e Domine o Futuro</h2>
-        <div class="row justify-content-center">
-            <div class="col-md-8 col-lg-6">
-                <p class="text-center mb-4 fs-5 text-secondary-text">
-                    Sua visão merece ser arquitetada com precisão e implementada com poder. Preencha o formulário abaixo para iniciarmos uma colaboração estratégica.
-                </p>
-                <form id="contactForm">
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Seu Nome</label>
-                        <input type="text" class="form-control" id="name" placeholder="Seu Nome Completo" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Seu Email</label>
-                        <input type="email" class="form-control" id="email" placeholder="email@exemplo.com" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="subject" class="form-label">Assunto</label>
-                        <input type="text" class="form-control" id="subject" placeholder="Assunto da Mensagem" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="message" class="form-label">Sua Mensagem</label>
-                        <textarea class="form-control" id="message" rows="5" placeholder="Descreva sua visão ou desafio..." required></textarea>
-                    </div>
-                    <div class="d-grid gap-2">
-                        <button type="submit" class="btn btn-submit">
-                            <i class="bi bi-send-fill me-2"></i> Enviar Mensagem
-                        </button>
-                    </div>
-                    <div id="formMessage" class="mt-3 text-center d-none"></div>
-                </form>
-            </div>
+    <h2 class="text-center mb-5">Conecte-se e Domine o Futuro</h2>
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <p class="text-center mb-4 fs-5 text-secondary-text">
+                Sua visão merece ser arquitetada com precisão e implementada com poder. Preencha o formulário abaixo para iniciarmos uma colaboração estratégica.
+            </p>
+            <form id="contactForm">
+                <input type="hidden" name="access_key" value="90277097-29be-4f44-922a-0c2ed839943b">
+                <input type="hidden" name="subject" id="dynamicSubject" value="Nova Mensagem do Site">
+                <input type="checkbox" name="botcheck" class="d-none" style="display: none;">
+
+                <div class="mb-3">
+                    <label for="name" class="form-label">Seu Nome</label>
+                    <input type="text" name="name" class="form-control" id="name" placeholder="Seu Nome Completo" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="email" class="form-label">Seu Email</label>
+                    <input type="email" name="email" class="form-control" id="email" placeholder="email@exemplo.com" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="userSubject" class="form-label">Assunto</label>
+                    <input type="text" class="form-control" id="userSubject" placeholder="Assunto da Mensagem" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="message" class="form-label">Sua Mensagem</label>
+                    <textarea name="message" class="form-control" id="message" rows="5" placeholder="Descreva sua visão ou desafio..." required></textarea>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-submit">
+                        <i class="bi bi-send-fill me-2"></i> Enviar Mensagem
+                    </button>
+                </div>
+
+                <div id="formMessage" class="mt-3 text-center d-none alert" role="alert"></div>
+            </form>
         </div>
-    </section>
+    </div>
+</section>
+    
 
     <!-- Footer -->
     <footer class="footer-custom">
@@ -626,6 +636,8 @@
         </div>
     </footer>
 
+    <!-- Gsap -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <!-- Script JS customizado -->
