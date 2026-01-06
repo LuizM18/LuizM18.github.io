@@ -204,23 +204,48 @@
         /* Portfolio/Projects Section */
         .project-card {
             background-color: var(--dark-blue);
-            border: 1px solid var(--blood-red);
+            border: 2px solid var(--blood-red);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
         .project-card:hover {
             transform: translateY(-8px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
         }
         .project-card img {
-            border-bottom: 1px solid var(--blood-red);
+            border-bottom: 2px solid var(--blood-red);
+            height: 240px;
+            object-fit: cover;
         }
         .project-card .card-title {
             color: var(--gold-accent);
         }
         .project-card .card-text {
             color: var(--secondary-text);
+            flex-grow: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 3; /* Limite inicial */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            margin-bottom: 1rem;
+            cursor: pointer; /* Indica que é clicável */
+            transition: all 0.3s ease;
         }
+        
+        .project-card .card-text.expanded {
+            -webkit-line-clamp: unset; 
+            display: block; 
+            overflow: visible;
+        }
+
+        /* Estilo para os 3 pontinhos simulados via pseudo-elemento ou apenas feedback visual */
+        .project-card .card-text:not(.expanded):hover {
+            color: var(--silver-light); /* Muda a cor ao passar o mouse para indicar interação */
+        }
+
         .project-card .btn-secondary-gold {
             background-color: transparent;
             border: 1px solid var(--silver-light);
@@ -231,6 +256,19 @@
             background-color: var(--silver-light);
             color: var(--dark-blue);
         }
+        /* Estilo para as tecnologias no rodapé do card */
+        .project-card small.text-secondary-text {
+            color: var(--gold-accent) !important; /* Usa o ouro para destacar */
+            background-color: rgba(255, 215, 0, 0.1); /* Um fundo sutil */
+            padding: 4px 8px;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            display: inline-block;
+            margin-right: 2px;
+            margin-left: 10px;
+        }
+
+
 
         /* Experience/Timeline Section */
         .timeline {
