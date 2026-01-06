@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
         text.addEventListener('click', () => {
             text.classList.toggle('expanded');
         
-            // Opcional: Rolar suavemente para o card se a descrição for muito longa
+            //Rolar suavemente para o card se a descrição for muito longa
             if (text.classList.contains('expanded')) {
                 text.style.cursor = 'zoom-out';
             } else {
