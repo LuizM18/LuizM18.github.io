@@ -1,0 +1,615 @@
+/* ==========================================================================
+   1. VARIÁVEIS E GLOBAIS (ESTRUTURA BASE)
+   ========================================================================== */
+
+:root {
+    --dark-blue: #0A192F;
+    --rich-black: #1A1A1D;
+    --gold-accent: #FFD700;
+    --gold-bright: #FFF5B3; /* Nova tonalidade para o topo do gradiente */
+    --gold-gradient: linear-gradient(90deg, #FFD700 0%, #FFB800 50%, #FFF5B3 100%);
+    --silver-light: #C0C0C0;
+    --blood-red: #8B0000;
+    --text-color: #E0E0E0;
+    --secondary-text: #A0A0A0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--rich-black);
+    color: var(--text-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+    background: var(--gold-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
+    text-shadow: none; /* Removi para não achatar o gradiente, assim ele fica fluido */
+}
+
+/* ==========================================================================
+   2. COMPONENTES COMPARTILHADOS (NAVBAR, FOOTER E BOTÕES)
+   ========================================================================== */
+
+.navbar-custom {
+    background-color: var(--dark-blue);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    padding: 1rem 0;
+    z-index: 1030;
+    position: sticky;
+    top: 0;
+}
+
+.navbar-brand-custom {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    background: var(--gold-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: filter 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-brand-custom img {
+    height: 30px;
+    width: auto;
+    border-radius: 0%;
+    margin-right: 10px;
+}
+
+.navbar-brand-custom:hover {
+    filter: brightness(1.2);
+}
+
+.nav-link-custom {
+    color: var(--silver-light) !important;
+    font-weight: 600;
+    margin: 0 10px;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.nav-link-custom:hover {
+    background: var(--gold-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transform: translateY(-2px);
+}
+
+.btn-outline-gold {
+    color: var(--gold-accent);
+    border: 2px solid;
+    border: 2px solid var(--gold-accent);;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-gold:hover {
+    background: var(--gold-gradient);
+    border-color: transparent;
+    color: var(--dark-blue) !important;
+    transform: scale(1.05);
+}
+
+.footer-custom {
+    background-color: var(--dark-blue);
+    padding: 30px 0;
+    text-align: center;
+    color: var(--secondary-text);
+    font-size: 0.9rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-custom a {
+    background: var(--gold-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+
+.footer-custom a:hover {
+    filter: brightness(1.2);
+}
+
+/* ==========================================================================
+   3. ESTILOS EXCLUSIVOS DA PÁGINA INICIAL (INDEX)
+   ========================================================================== */
+
+#hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('assets/images/bg-hero.jpeg') center center / cover no-repeat;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+#hero .hero-content {
+    z-index: 2;
+    padding: 2rem;
+    max-width: 900px;
+    animation: fadeIn 2s ease-out;
+}
+
+#hero h1 {
+    font-size: 4.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    background: var(--gold-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: slideInDown 1.5s ease-out;
+}
+
+#hero .lead {
+    font-size: 1.75rem;
+    font-weight: 300;
+    color: var(--silver-light);
+    margin-bottom: 2rem;
+    animation: fadeIn 2.5s ease-out;
+}
+
+#hero .btn-hero {
+    font-size: 1.25rem;
+    padding: 15px 30px;
+    border-radius: 50px;
+    animation: zoomIn 2s ease-out;
+}
+
+@media (max-width: 768px) {
+    #hero h1 { font-size: 3rem; }
+    #hero .lead { font-size: 1.25rem; }
+    #hero .btn-hero { font-size: 1rem; padding: 10px 20px; }
+}
+
+section {
+    padding: 80px 0;
+    position: relative;
+    background-color: var(--rich-black);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+section h2 {
+    font-size: 3.5rem;
+    margin-bottom: 3rem;
+    text-align: center;
+    background: var(--gold-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+section h2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    height: 3px;
+    width: 80px;
+    background: var(--gold-gradient);
+    border-radius: 5px;
+}
+
+#vision .card {
+    background-color: var(--dark-blue);
+    border: 2px solid;
+    border-image: var(--gold-gradient) 1;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#vision .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.7);
+}
+
+#vision img.profile-img {
+    border: 4px solid var(--gold-accent);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+}
+
+.skill-bar-container {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 15px;
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.skill-bar {
+    height: 25px;
+    /* Gradiente que evolui conforme a largura: começa no ouro e termina no ouro brilhante - Marcado para reutilização */
+    background: linear-gradient(90deg, var(--gold-accent) 0%, #FFB800 50%, var(--gold-bright) 100%);
+    /* O background-size garante que o brilho máximo esteja sempre no final da barra preenchida, com isso eu tenho controle da intensidade do gradiente */
+    background-size: 200% 100%; 
+    background-position: right bottom;
+    color: var(--dark-blue);
+    text-align: center;
+    line-height: 25px;
+    font-weight: 700;
+    border-radius: 5px;
+    width: 0;
+    transition: width 1.5s cubic-bezier(0.1, 0.7, 0.1, 1);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+}
+
+.skill-text {
+    color: var(--silver-light);
+    font-weight: 600;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.project-card {
+    background-color: var(--dark-blue);
+    border: 2px solid;
+    border-image: var(--gold-gradient) 1;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
+}
+
+.project-card img {
+    border-bottom: 2px solid;
+    border-image: var(--gold-gradient) 1;
+    height: 240px;
+    object-fit: cover;
+}
+
+.project-card .card-title {
+    background: var(--gold-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+}
+
+.project-card .card-text {
+    color: var(--secondary-text);
+    flex-grow: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.project-card .card-text.expanded {
+    -webkit-line-clamp: unset; 
+    display: block; 
+    overflow: visible;
+}
+
+.project-card .card-text:not(.expanded):hover {
+    color: var(--silver-light);
+}
+
+.project-card .btn-secondary-gold {
+    background-color: transparent;
+    border: 1px solid var(--silver-light);
+    color: var(--silver-light);
+    transition: all 0.3s ease;
+}
+
+.project-card .btn-secondary-gold:hover {
+    background-color: var(--silver-light);
+    color: var(--dark-blue);
+}
+
+.project-card small.text-secondary-text {
+    color: var(--dark-blue) !important;
+    background: var(--gold-gradient);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    display: inline-block;
+    margin-right: 2px;
+    margin-left: 10px;
+}
+
+.timeline {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    background: var(--gold-gradient);
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -3px;
+}
+
+.timeline-container {
+    padding: 10px 40px;
+    position: relative;
+    background-color: inherit;
+    width: 50%;
+}
+
+.timeline-container::after {
+    content: '';
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    right: -17px;
+    background-color: var(--dark-blue);
+    border: 4px solid var(--gold-accent);
+    top: 15px;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.left { left: 0; }
+.right { left: 50%; }
+.right::after { left: -16px; }
+
+.timeline-content {
+    padding: 20px 30px;
+    background-color: var(--dark-blue);
+    position: relative;
+    border-radius: 6px;
+    border: 1px solid;
+    border-image: var(--gold-gradient) 1;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.timeline-content h3 { 
+    background: var(--gold-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.timeline-content small { color: var(--secondary-text); }
+
+@media screen and (max-width: 768px) {
+    .timeline::after { left: 31px; }
+    .timeline-container {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+    }
+    .timeline-container::before {
+        left: 60px;
+        border: medium solid;
+        border-image: var(--gold-gradient) 1;
+        border-width: 10px 0 10px 10px;
+    }
+    .left::after, .right::after { left: 15px; }
+    .right { left: 0%; }
+}
+
+#contact .form-control, #contact .form-select {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--text-color);
+}
+
+#contact .form-control:focus, #contact .form-select:focus {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-color: var(--gold-accent);
+    box-shadow: 0 0 0 0.25rem rgba(255, 215, 0, 0.25);
+    color: var(--text-color);
+}
+
+#contact .form-control::placeholder { color: var(--secondary-text); }
+
+#contact .btn-submit {
+    background: var(--gold-gradient);
+    border: none;
+    color: var(--dark-blue);
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+
+#contact .btn-submit:hover {
+    filter: brightness(1.2);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+}
+
+/* ==========================================================================
+   4. ESTILOS EXCLUSIVOS DA CARTA DE APRESENTAÇÃO (COVER LETTER)
+   ========================================================================== */
+
+.page-banner {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('assets/images/bg-hero.jpeg') center center / cover no-repeat;
+    min-height: 30vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    padding: 2rem;
+}
+
+.page-banner h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    background: var(--gold-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: fadeIn 1.5s ease-out;
+}
+
+@media (max-width: 768px) {
+    .page-banner h1 {
+        font-size: 2.5rem;
+    }
+}
+
+#cover-letter-content {
+    background-color: var(--dark-blue);
+    padding: 60px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    margin-top: -80px; 
+    position: relative;
+    z-index: 1;
+    border: 2px solid;
+    border-image: var(--gold-gradient) 1;
+}
+
+#cover-letter-content p {
+    font-size: 1.15rem;
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+}
+
+#cover-letter-content strong {
+    background: var(--gold-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+}
+
+#cover-letter-content .signature {
+    margin-top: 3rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--silver-light);
+}
+
+#cover-letter-content .contact-info a {
+    background: var(--gold-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+    text-decoration: none;
+    transition: filter 0.3s ease;
+}
+
+#cover-letter-content .contact-info a:hover {
+    filter: brightness(1.2);
+}
+
+.footer-custom {
+    margin-top: 50px;
+}
+
+/* ==========================================================================
+   5. ANIMAÇÕES, SPRITES E KEYFRAMES (O CORAÇÃO DO SISTEMA)
+   ========================================================================== */
+
+.fade-in-up-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-up-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.character-area {
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 250px;
+    height: 200px;
+    pointer-events: none;
+    display: flex;
+    align-items: flex-end;
+}
+
+.character-sprite {
+    height: 150px;
+    width: auto;
+    z-index: 3;
+    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
+    animation: characterShake 6s infinite;
+}
+
+.energy-blast-img {
+    position: absolute;
+    bottom: 10px;
+    left: 80px; 
+    height: 100px;
+    width: 0;
+    object-fit: fill;
+    z-index: 2;
+    opacity: 0;
+    filter: drop-shadow(0 0 15px #00d4ff);
+    animation: fireKamehameha 6s infinite ease-in;
+}
+
+.animate__fadeInUp {
+    animation-name: fadeInUp;
+    animation-duration: 1.5s;
+    animation-fill-mode: both;
+}
+
+@keyframes fireKamehameha {
+    0%, 65% { width: 0; opacity: 0; }
+    70% { width: 100px; opacity: 1; }
+    85% { width: 1200px; opacity: 1; }
+    95% { width: 1500px; opacity: 0; }
+    100% { width: 0; opacity: 0; }
+}
+
+@keyframes characterShake {
+    0%, 68% { transform: translate(0, 0); }
+    70%, 85% { transform: translate(-2px, 1px); }
+    90% { transform: translate(0, 0); }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 40px, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideInDown {
+    from {
+        transform: translate3d(0, -100%, 0);
+        visibility: visible;
+    }
+    to { transform: translate3d(0, 0, 0); }
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale3d(0.3, 0.3, 0.3);
+    }
+    50% { opacity: 1; }
+}
