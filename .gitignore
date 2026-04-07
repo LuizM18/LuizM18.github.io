@@ -9,7 +9,8 @@ yarn-debug.log*
 yarn-error.log*
 
 # IDEs
-.vscode/ # Ignora configurações locais do VS Code
+.vscode/ 
+# Ignora configurações locais do VS Code
 
 # Arquivos de sistema
 .DS_Store

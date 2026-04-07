@@ -124,3 +124,57 @@ gsap.to(".me-2", {
     ease: "none",
     repeat: -1
 });
+
+/* --- INJEÇÃO ISOLADA TYPEWRITER v6.7 --- */
+(function() {
+    const initTypewriter = () => {
+        const el = document.getElementById('typewriter');
+        if (!el) return;
+
+        let words = [];
+        try {
+            // Tenta ler o JSON do HTML
+            words = JSON.parse(el.getAttribute('data-words'));
+        } catch (e) {
+            console.error("Erro ao ler data-words. Verifique as aspas no HTML.");
+            // Fallback caso o JSON quebre
+            words = ["Arquiteto de Soluções", "Solutions Architect"];
+        }
+
+        let wordIdx = 0;
+        let charIdx = 0;
+        let isDeleting = false;
+
+        const type = () => {
+            const currentWord = words[wordIdx % words.length];
+            
+            if (isDeleting) {
+                el.textContent = currentWord.substring(0, charIdx--);
+            } else {
+                el.textContent = currentWord.substring(0, charIdx++);
+            }
+
+            let speed = isDeleting ? 40 : 100;
+
+            if (!isDeleting && charIdx > currentWord.length) {
+                isDeleting = true;
+                speed = 2500; // Tempo parado na palavra completa
+            } else if (isDeleting && charIdx < 0) {
+                isDeleting = false;
+                charIdx = 0;
+                wordIdx++;
+                speed = 500; // Tempo parado antes de começar nova palavra
+            }
+
+            setTimeout(type, speed);
+        };
+
+        type();
+    };
+
+    if (document.readyState === 'complete') {
+        initTypewriter();
+    } else {
+        window.addEventListener('load', initTypewriter);
+    }
+})();

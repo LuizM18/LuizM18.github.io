@@ -605,6 +605,41 @@ section h2::after {
    5. ANIMAÇÕES, SPRITES E KEYFRAMES (O CORAÇÃO DO SISTEMA)
    ========================================================================== */
 
+/* --- Status Pulse (LMKAR Live) --- */
+.status-pulse { 
+    animation: pulse 2s infinite; 
+}
+
+@keyframes pulse { 
+    0%, 100% { opacity: 1; } 
+    50% { opacity: 0.5; } 
+}
+
+/* --- Typewriter & Cursor --- */
+.typewriter-cursor { 
+    border-right: 2px solid var(--gold-accent); 
+    animation: blink 0.75s step-end infinite; 
+}
+
+@keyframes blink { 
+    from, to { border-color: transparent } 
+    50% { border-color: var(--gold-accent) } 
+}
+
+/* --- Tech Tags (Badges de Tecnologia) --- */
+.tech-tag { 
+    font-size: 0.7rem; 
+    padding: 2px 8px; 
+    border-radius: 4px; 
+    background: rgba(255, 215, 0, 0.1); 
+    color: var(--gold-accent); 
+    border: 1px solid rgba(255, 215, 0, 0.3); 
+    text-transform: uppercase; 
+    margin-right: 5px; 
+    font-weight: bold; 
+    display: inline-block;
+}
+
 .fade-in-up-on-scroll {
     opacity: 0;
     transform: translateY(20px);
