@@ -1,180 +1,329 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- 1. LÓGICA DE OBSERVAÇÃO (SKILLS E FADE-IN) ---
-    const skillBars = document.querySelectorAll('.skill-bar');
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
+    const SELECTORS = {
+        skillBars: '.skill-bar',
+        fadeSections: 'section.fade-in-up-on-scroll',
+        timelineItems: '.timeline-container',
+        contactForm: '#contactForm',
+        formMessage: '#formMessage',
+        subjectInput: '#userSubject',
+        nameInput: '#name',
+        dynamicSubject: '#dynamicSubject',
+        projectCards: '.project-card',
+        typewriter: '#typewriter',
+        navbarLinks: '.nav-link-custom[href^="#"]',
+        observedSections: 'section[id]'
     };
 
-    const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                if (entry.target.classList.contains('skill-bar')) {
-                    const progress = entry.target.dataset.progress;
-                    entry.target.style.width = progress + '%';
-                    observer.unobserve(entry.target);
-                }
-                if (entry.target.classList.contains('fade-in-up-on-scroll')) {
-                    entry.target.classList.add('is-visible');
-                    observer.unobserve(entry.target);
-                }
+    const CSS_CLASSES = {
+        visible: 'is-visible',
+        expanded: 'expanded',
+        loading: 'is-loading',
+        active: 'active',
+        alertBase: 'mt-3 text-center p-2 rounded alert',
+        alertSuccess: 'alert-success',
+        alertError: 'alert-danger',
+        hidden: 'd-none'
+    };
+
+    // -----------------------------
+    // 1. OBSERVERS (sections, skills, timeline)
+    // -----------------------------
+    const skillBars = document.querySelectorAll(SELECTORS.skillBars);
+    const fadeSections = document.querySelectorAll(SELECTORS.fadeSections);
+    const timelineItems = document.querySelectorAll(SELECTORS.timelineItems);
+
+    const revealObserverOptions = {
+        root: null,
+        rootMargin: '0px 0px -10% 0px',
+        threshold: 0.15
+    };
+
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+
+            const target = entry.target;
+
+            if (target.matches(SELECTORS.skillBars)) {
+                const progress = Number(target.dataset.progress) || 0;
+                target.style.width = `${progress}%`;
+                target.setAttribute('aria-valuenow', String(progress));
+                observer.unobserve(target);
+                return;
+            }
+
+            if (
+                target.matches(SELECTORS.fadeSections) ||
+                target.matches(SELECTORS.timelineItems)
+            ) {
+                target.classList.add(CSS_CLASSES.visible);
+                observer.unobserve(target);
             }
         });
-    }, observerOptions);
+    }, revealObserverOptions);
 
-    skillBars.forEach(bar => observer.observe(bar));
-    document.querySelectorAll('section.fade-in-up-on-scroll').forEach(section => observer.observe(section));
+    skillBars.forEach((bar) => {
+        bar.style.width = '0%';
+        bar.setAttribute('role', 'progressbar');
+        bar.setAttribute('aria-valuemin', '0');
+        bar.setAttribute('aria-valuemax', '100');
+        bar.setAttribute('aria-valuenow', '0');
+        revealObserver.observe(bar);
+    });
 
-    // --- 2. NOVA LÓGICA DE FORMULÁRIO (INTEGRADA COM WEB3FORMS) ---
-    const contactForm = document.getElementById('contactForm');
-    const formMessage = document.getElementById('formMessage');
-    const submitBtn = contactForm ? contactForm.querySelector('button[type="submit"]') : null;
+    fadeSections.forEach((section) => revealObserver.observe(section));
+    timelineItems.forEach((item) => revealObserver.observe(item));
+
+    // -----------------------------
+    // 2. NAVBAR ACTIVE STATE
+    // -----------------------------
+    const navbarLinks = document.querySelectorAll(SELECTORS.navbarLinks);
+    const observedSections = document.querySelectorAll(SELECTORS.observedSections);
+    const navbar = document.querySelector('.navbar-custom');
+
+    const clearActiveLinks = () => {
+        navbarLinks.forEach((link) => {
+            link.classList.remove(CSS_CLASSES.active);
+            link.removeAttribute('aria-current');
+        });
+    };
+
+    const setActiveLinkById = (sectionId) => {
+        if (!sectionId) return;
+
+        const targetLink = document.querySelector(
+            `${SELECTORS.navbarLinks}[href="#${sectionId}"]`
+        );
+
+        if (!targetLink) return;
+
+        clearActiveLinks();
+        targetLink.classList.add(CSS_CLASSES.active);
+        targetLink.setAttribute('aria-current', 'page');
+    };
+
+    const updateActiveNavOnScroll = () => {
+        if (!observedSections.length || !navbarLinks.length) return;
+
+        const navbarHeight = navbar ? navbar.offsetHeight : 0;
+        const activationLine = navbarHeight + 120;
+
+        // Caso especial: hero/topo
+        const heroSection = document.getElementById('hero');
+        if (heroSection) {
+            const heroRect = heroSection.getBoundingClientRect();
+            if (heroRect.top <= activationLine && heroRect.bottom > activationLine) {
+                setActiveLinkById('hero');
+                return;
+            }
+        }
+
+        let currentSectionId = '';
+
+        observedSections.forEach((section) => {
+            const rect = section.getBoundingClientRect();
+
+            if (rect.top <= activationLine && rect.bottom > activationLine) {
+                currentSectionId = section.id;
+            }
+        });
+
+        if (currentSectionId) {
+            setActiveLinkById(currentSectionId);
+        }
+    };
+
+    // Atualiza ao clicar em links âncora da própria página
+    navbarLinks.forEach((link) => {
+        link.addEventListener('click', () => {
+            const href = link.getAttribute('href');
+            if (!href || !href.startsWith('#')) return;
+
+            const sectionId = href.slice(1);
+            setActiveLinkById(sectionId);
+        });
+    });
+
+    window.addEventListener('scroll', updateActiveNavOnScroll, { passive: true });
+    window.addEventListener('resize', updateActiveNavOnScroll);
+    updateActiveNavOnScroll();
+
+    // -----------------------------
+    // 3. FORMULÁRIO (Web3Forms)
+    // -----------------------------
+    const contactForm = document.querySelector(SELECTORS.contactForm);
+    const formMessage = document.querySelector(SELECTORS.formMessage);
 
     if (contactForm) {
-        contactForm.addEventListener('submit', function(event) {
-            event.preventDefault(); 
+        const submitBtn = contactForm.querySelector('button[type="submit"]');
+        const nameInput = document.querySelector(SELECTORS.nameInput);
+        const subjectInput = document.querySelector(SELECTORS.subjectInput);
+        const dynamicSubjectField = document.querySelector(SELECTORS.dynamicSubject);
 
-            // Formatação dinâmica do assunto
-            const userName = document.getElementById('name').value;
-            const userSubject = document.getElementById('userSubject').value;
-            const dynamicSubjectField = document.getElementById('dynamicSubject');
-            if(dynamicSubjectField) {
-                dynamicSubjectField.value = `PROJETO: ${userName} - ${userSubject}`;
+        const setFormMessage = (type, message) => {
+            if (!formMessage) return;
+
+            formMessage.className = `${CSS_CLASSES.alertBase} ${
+                type === 'success' ? CSS_CLASSES.alertSuccess : CSS_CLASSES.alertError
+            }`;
+            formMessage.textContent = message;
+            formMessage.classList.remove(CSS_CLASSES.hidden);
+        };
+
+        const hideFormMessage = () => {
+            if (!formMessage) return;
+            formMessage.classList.add(CSS_CLASSES.hidden);
+        };
+
+        contactForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            if (!submitBtn || !nameInput || !subjectInput || !dynamicSubjectField) {
+                console.error('Elementos essenciais do formulário não foram encontrados.');
+                return;
             }
 
-            // Estado de carregamento no botão
-            const originalBtnText = submitBtn.innerHTML;
+            const userName = nameInput.value.trim();
+            const userSubject = subjectInput.value.trim();
+
+            dynamicSubjectField.value = userSubject
+                ? `PROJETO: ${userName} - ${userSubject}`
+                : `PROJETO: ${userName}`;
+
+            const originalBtnHTML = submitBtn.innerHTML;
+
             submitBtn.disabled = true;
-            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status"></span> Enviando...';
+            submitBtn.classList.add(CSS_CLASSES.loading);
+            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Enviando...';
 
-            const formData = new FormData(contactForm);
-            const object = Object.fromEntries(formData);
-            const json = JSON.stringify(object);
+            try {
+                const formData = new FormData(contactForm);
+                const payload = Object.fromEntries(formData.entries());
 
-            fetch('https://api.web3forms.com/submit', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: json
-            })
-            .then(async (response) => {
-                if (response.status == 200) {
-                    formMessage.className = "mt-3 text-center p-2 rounded alert alert-success";
-                    formMessage.textContent = 'Mensagem enviada com sucesso! Em breve entrarei em contato.';
+                const response = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                if (response.ok) {
+                    setFormMessage('success', 'Mensagem enviada com sucesso! Em breve entrarei em contato.');
                     contactForm.reset();
                 } else {
-                    formMessage.className = "mt-3 text-center p-2 rounded alert alert-danger";
-                    formMessage.textContent = 'Ops! Ocorreu um erro ao enviar.';
+                    setFormMessage('error', 'Ops! Ocorreu um erro ao enviar sua mensagem.');
                 }
-            })
-            .catch(error => {
-                formMessage.className = "mt-3 text-center p-2 rounded alert alert-danger";
-                formMessage.textContent = 'Erro de conexão com o servidor.';
-            })
-            .finally(() => {
-                formMessage.classList.remove('d-none');
+            } catch (error) {
+                console.error('Erro no envio do formulário:', error);
+                setFormMessage('error', 'Erro de conexão. Tente novamente em instantes.');
+            } finally {
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = originalBtnText;
+                submitBtn.classList.remove(CSS_CLASSES.loading);
+                submitBtn.innerHTML = originalBtnHTML;
 
-                setTimeout(() => {
-                    formMessage.classList.add('d-none');
+                window.setTimeout(() => {
+                    hideFormMessage();
                 }, 5000);
-            });
-        });
-    }
-
-    // --- 3. LÓGICA DA TIMELINE E OUTROS ---
-    function handleScrollTimeline() {
-        const containers = document.querySelectorAll('.timeline-container');
-        containers.forEach(container => {
-            const rect = container.getBoundingClientRect();
-            if (rect.top <= window.innerHeight * 0.75 && rect.bottom >= 0) {
-                container.classList.add('is-visible');
             }
         });
     }
-    window.addEventListener('scroll', handleScrollTimeline);
-    handleScrollTimeline();
 
+    // -----------------------------
+    // 4. INTERAÇÃO DOS CARDS DE PROJETO
+    // -----------------------------
+    const projectCards = document.querySelectorAll(SELECTORS.projectCards);
 
-    // --- 4. LÓGICA DO LER MAIS ---
-    const projectTexts = document.querySelectorAll('.project-card .card-text');
+    projectCards.forEach((card) => {
+        const mainText = card.querySelector('.card-text');
 
-    projectTexts.forEach(text => {
-        text.addEventListener('click', () => {
-            text.classList.toggle('expanded');
-        
-            //Rolar suavemente para o card se a descrição for muito longa
-            if (text.classList.contains('expanded')) {
-                text.style.cursor = 'zoom-out';
-            } else {
-                text.style.cursor = 'zoom-in';
-        }
+        if (!mainText) return;
+
+        card.addEventListener('click', (event) => {
+            const clickedInteractiveElement = event.target.closest('a, button');
+
+            if (clickedInteractiveElement) return;
+
+            mainText.classList.toggle(CSS_CLASSES.expanded);
+            card.setAttribute(
+                'aria-expanded',
+                String(mainText.classList.contains(CSS_CLASSES.expanded))
+            );
+        });
+
+        card.addEventListener('keydown', (event) => {
+            const isActivationKey = event.key === 'Enter' || event.key === ' ';
+
+            if (!isActivationKey) return;
+            if (event.target.closest('a, button')) return;
+
+            event.preventDefault();
+            mainText.classList.toggle(CSS_CLASSES.expanded);
+            card.setAttribute(
+                'aria-expanded',
+                String(mainText.classList.contains(CSS_CLASSES.expanded))
+            );
+        });
+
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('role', 'button');
+        card.setAttribute('aria-label', 'Expandir ou recolher descrição do projeto');
+        card.setAttribute('aria-expanded', 'false');
     });
-});
-});
 
-// Animação GSAP
-gsap.to(".me-2", {
-    rotation: 360,
-    duration: 3,
-    ease: "none",
-    repeat: -1
-});
-
-/* --- INJEÇÃO ISOLADA TYPEWRITER v6.7 --- */
-(function() {
+    // -----------------------------
+    // 5. TYPEWRITER
+    // -----------------------------
     const initTypewriter = () => {
-        const el = document.getElementById('typewriter');
+        const el = document.querySelector(SELECTORS.typewriter);
         if (!el) return;
 
         let words = [];
+
         try {
-            // Tenta ler o JSON do HTML
             words = JSON.parse(el.getAttribute('data-words'));
-        } catch (e) {
-            console.error("Erro ao ler data-words. Verifique as aspas no HTML.");
-            // Fallback caso o JSON quebre
-            words = ["Arquiteto de Soluções", "Solutions Architect"];
+        } catch (error) {
+            console.error('Erro ao interpretar data-words do typewriter:', error);
+            words = [
+                'Desenvolvimento Full Stack',
+                'Python e Automação'
+            ];
         }
 
-        let wordIdx = 0;
-        let charIdx = 0;
+        if (!Array.isArray(words) || words.length === 0) return;
+
+        let wordIndex = 0;
+        let charIndex = 0;
         let isDeleting = false;
 
         const type = () => {
-            const currentWord = words[wordIdx % words.length];
-            
+            const currentWord = words[wordIndex % words.length];
+
             if (isDeleting) {
-                el.textContent = currentWord.substring(0, charIdx--);
+                charIndex--;
             } else {
-                el.textContent = currentWord.substring(0, charIdx++);
+                charIndex++;
             }
 
-            let speed = isDeleting ? 40 : 100;
+            el.textContent = currentWord.slice(0, charIndex);
 
-            if (!isDeleting && charIdx > currentWord.length) {
+            let speed = isDeleting ? 45 : 90;
+
+            if (!isDeleting && charIndex === currentWord.length) {
+                speed = 1800;
                 isDeleting = true;
-                speed = 2500; // Tempo parado na palavra completa
-            } else if (isDeleting && charIdx < 0) {
+            } else if (isDeleting && charIndex === 0) {
                 isDeleting = false;
-                charIdx = 0;
-                wordIdx++;
-                speed = 500; // Tempo parado antes de começar nova palavra
+                wordIndex++;
+                speed = 450;
             }
 
-            setTimeout(type, speed);
+            window.setTimeout(type, speed);
         };
 
         type();
     };
 
-    if (document.readyState === 'complete') {
-        initTypewriter();
-    } else {
-        window.addEventListener('load', initTypewriter);
-    }
-})();
+    initTypewriter();
+});
