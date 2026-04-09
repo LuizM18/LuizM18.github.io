@@ -74,17 +74,32 @@ label,
    ========================================================================== */
 
 .navbar-custom {
-    background-color: var(--dark-blue);
-    position: sticky;
-    top: 0;
-    z-index: 1030;
-    padding: 0.7rem 0;
-    border-bottom: 5px solid transparent;
-    background-image: linear-gradient(var(--dark-blue), var(--dark-blue)), var(--gold-gradient);
-    background-origin: border-box;
-    background-clip: padding-box, border-box;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 10px rgba(255, 215, 0, 0.1);
-    transition: all 0.4s ease;
+    position: fixed;
+    top: 12px;
+    left: 0;
+    right: 0;
+    width: min(1180px, calc(100% - 24px));
+    margin: 0 auto;
+    border-radius: 999px;
+    z-index: 1000;
+    overflow: hidden;
+    
+    padding: 0.75rem 1.5rem;
+
+    background: 
+        linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)), 
+        rgba(8, 14, 28, 0.54);
+    backdrop-filter: blur(18px) saturate(150%);
+    -webkit-backdrop-filter: blur(18px) saturate(150%);
+    
+
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    
+
+    box-shadow:
+        0 10px 34px rgba(0, 0, 0, 0.32),            
+        inset 0 1px 0 rgba(255, 255, 255, 0.08),    
+        inset 0 -1px 0 rgba(255, 255, 255, 0.03);   
 }
 
 .navbar-custom:hover {
