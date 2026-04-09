@@ -687,6 +687,7 @@ section h2::after {
 .page-banner h1 {
     font-size: 3.5rem;
     font-weight: 700;
+    padding-top: 96px;
     background: var(--gold-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
