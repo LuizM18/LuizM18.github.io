@@ -170,6 +170,10 @@ label,
     text-decoration: none;
 }
 
+.navbar-custom:has(.show) {
+    border-radius: 15px;
+}
+
 .nav-link-custom:hover,
 .nav-link-custom:focus {
     background: var(--gold-gradient);
