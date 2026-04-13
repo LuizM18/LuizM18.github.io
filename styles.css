@@ -133,6 +133,7 @@ label,
     font-family: 'Playfair Display', serif;
     font-size: 2rem;
     font-weight: 700;
+    font-variant-numeric: lining-nums;
     letter-spacing: 0.4px;
     background: var(--gold-gradient);
     -webkit-background-clip: text;
