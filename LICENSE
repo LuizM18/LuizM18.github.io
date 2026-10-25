@@ -1,21 +1,35 @@
-Attribution-NonCommercial-NoDerivates 4.0 International
+Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)
 
-Creative Commons Corporation ("Creative Commons") is not a law firm and does not provide legal services. 
+Creative Commons Corporation ("Creative Commons") is not a law firm and does not provide legal services.
 
 Lm18 Systems | Desenvolvimento Web, Automação e Banco de Dados
-Copyright (c) 2026 Luiz Mario A. (Owner of Lm18)
+Copyright (c) 2026 Luiz Mario Alves Ozorio (Lm18 Systems). https://lm18.dev
 
-Link to the full Legal Code: 
+Link to the full Legal Code:
 https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode
 
-By exercising the Licensed Rights (defined in the link above), You accept and agree to be bound by the terms and conditions of this Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International Public License. 
+By exercising the Licensed Rights (defined in the link above), You accept and agree to be bound by the terms and conditions of this Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International Public License.
 
 To the extent this Public License may be interpreted as a contract, You are granted the Licensed Rights in consideration of Your acceptance of these terms and conditions, and the Licensor grants You such rights in consideration of benefits the Licensor receives from making the Licensed Material available under these terms and conditions.
 
-1. Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. 
+1. Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made.
 2. NonCommercial — You may not use the material for commercial purposes.
 3. NoDerivatives — If you remix, transform, or build upon the material, you may not distribute the modified material.
 
-The names "Lm18", "Lm18 Systems", and "Lm18 I-Check" are proprietary marks of Luiz Mario A. This license does not grant permission to use the trade names, trademarks, service marks, or product names of the Licensor.
+TRADEMARKS
+The names "Lm18", "Lm18 Systems", "Lm18 I-Check" and "Nexus Dispatch Engine", and the Lm18 monogram logo, are proprietary marks of Luiz Mario Alves Ozorio. This license does not grant permission to use the trade names, trademarks, service marks, logos or product names of the Licensor.
+
+MATERIAL NOT COVERED BY THIS LICENSE (ALL RIGHTS RESERVED)
+The following are not licensed under Creative Commons and may not be copied, reused or redistributed without prior written permission:
+- the portrait photographs of Luiz Mario Alves Ozorio;
+- the "LuizIA" character artwork;
+- the screenshots of the projects shown on the site;
+- the résumé (Curriculo-Luiz-Mario-Alves-Ozorio.pdf).
+
+THIRD-PARTY COMPONENTS
+Third-party libraries and fonts loaded by the site keep their own licenses and are not covered by this license:
+- Bootstrap and Bootstrap Icons (MIT License);
+- GSAP (GreenSock Standard "No Charge" License);
+- Inter and Playfair Display, via Google Fonts (SIL Open Font License 1.1).
 
 For the full legal text in English, please visit the official Creative Commons website.

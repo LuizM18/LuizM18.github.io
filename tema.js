@@ -1,0 +1,1 @@
+!function(){var t=null;try{t=localStorage.getItem("lm18-tema")}catch(t){}var e=window.matchMedia&&window.matchMedia("(prefers-color-scheme: light)").matches,a="light"===t||"dark"===t?t:e?"light":"dark";document.documentElement.setAttribute("data-theme",a)}();
