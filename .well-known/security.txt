@@ -1,0 +1,6 @@
+# Política de divulgação de vulnerabilidades do lm18.dev (Lm18 Systems)
+# Encontrou um problema de segurança? Escreva para o contato abaixo antes de divulgar.
+Contact: mailto:luizmario2007deus@gmail.com
+Expires: 2027-10-29T23:59:59.000Z
+Preferred-Languages: pt-BR, en
+Canonical: https://lm18.dev/.well-known/security.txt
